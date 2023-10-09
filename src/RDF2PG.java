@@ -1,6 +1,6 @@
-/* 
+/*
  * Copyright 2020 Renzo Angles (http://renzoangles.com/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,14 +34,14 @@ public class RDF2PG {
                 System.out.println("Running simple database mapping");
                 SimpleMapping smap = new SimpleMapping();
                 smap.run(input_filename);
-                System.out.println("Output: instance.ypg");
+                System.out.println("Output: sudentExample-instance.ypg");
             } else if (opt.compareTo("-gdm") == 0) {
                 System.out.println("Running generic database mapping");
                 GenericMapping gdm = new GenericMapping();
                 gdm.run(input_filename);
                 PropertyGraph schema = gdm.getPGSchema();
-                schema.exportAsYPG("schema.ypg");
-                System.out.println("Output: instance.ypg and schema.ypg");
+                schema.exportAsYPG("sudentExample-schema.ypg");
+                System.out.println("Output: sudentExample-instance.ypg and sudentExample-schema.ypg");
             } else {
                 System.out.println("Invalid option");
             }
@@ -57,14 +57,34 @@ public class RDF2PG {
                 System.out.println("Running complete database mapping");
                 CompleteMapping cdm = new CompleteMapping();
                 cdm.run(rdf_filename, rdfs_filename);
-                System.out.println("Output: instance.ypg and schema.ypg");
+                System.out.println("Output: sudentExample-instance.ypg and sudentExample-schema.ypg");
             } else {
                 System.out.println("Invalid option");
             }
             etime = System.currentTimeMillis() - itime;
             System.out.println("Execution time: " + etime + " ms \n");
 
-        } else {
+        } else if (args.length == 4) {
+            itime = System.currentTimeMillis();
+            String opt = String.valueOf(args[0]);
+            String rdf_filename = String.valueOf(args[1]);
+            String rdfs_filename = String.valueOf(args[2]);
+            String neo4j_flag = String.valueOf(args[3]);
+            if (opt.compareTo("-cdm") == 0 && neo4j_flag.compareTo("-neo4j") == 0) {
+                System.out.println("Hello, Running complete database mapping with Neo4j Query output");
+                Neo4jWriter instance_pgWriter = new Neo4jWriter("instance-queries-cdm.cypher");
+                Neo4jWriter schema_pgWriter = new Neo4jWriter("schema-queries-cdm.cypher");
+                CompleteMapping cdm = new CompleteMapping();
+                cdm.run(rdf_filename, rdfs_filename, instance_pgWriter,schema_pgWriter);
+
+                System.out.println("Output: sudentExample-instance.ypg and sudentExample-schema.ypg");
+            } else {
+                System.out.println("Invalid option");
+            }
+            etime = System.currentTimeMillis() - itime;
+            System.out.println("Execution time: " + etime + " ms \n");
+
+        }  else {
             System.out.println("Usage:");
             System.out.println("// Simple database mapping");
             System.out.println("$ java -jar rdf2pg -sdm <RDF_filename>");
