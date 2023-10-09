@@ -1,0 +1,13 @@
+id:ID|iri|:LABEL
+12|http://x.y/alice|nss1_Professor;nss1_Faculty;nss1_Person;Node
+21|http://x.y/MIT|nss1_University;Node
+162|http://x.y/MitsAddress|nss1_Address;Node
+57|http://x.y/Math101|nss1_Course;nss1_GraduateCourse;Node
+78|http://x.y/MathDept|nss1_Department;Node
+28|http://x.y/John|nss1_Student;nss1_GraduateStudent;nss1_Person;Node
+1|http://x.y/Bob|nss1_Student;nss1_UnderGraduateStudent;nss1_Person;Node
+69|http://x.y/Stanford|nss1_University;Node
+24|http://x.y/CompSci202|nss1_Course;nss1_UnderGradCourse;Node
+39|http://x.y/Marry|nss1_Professor;nss1_Faculty;nss1_Person;Node
+99|http://x.y/CompSciDept|nss1_Department;Node
+180|http://x.y/UsaCountry|nss1_Country;Node

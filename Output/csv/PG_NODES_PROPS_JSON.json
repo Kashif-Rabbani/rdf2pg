@@ -1,0 +1,164 @@
+[
+  {
+    "iri": "http://x.y/alice",
+    "properties": {
+      "nss1_name": "Alice Smith"
+    }
+  },
+  {
+    "iri": "http://x.y/alice",
+    "properties": {
+      "nss1_name": "Alice Smith"
+    }
+  },
+  {
+    "iri": "http://x.y/MIT",
+    "properties": {
+      "nss1_name": "Massachusetts Institute of Technology"
+    }
+  },
+  {
+    "iri": "http://x.y/MIT",
+    "properties": {
+      "nss1_name": "Massachusetts Institute of Technology"
+    }
+  },
+  {
+    "iri": "http://x.y/MitsAddress",
+    "properties": {
+      "nss1_street": "77 Massachusetts Avenue",
+      "nss1_city": "Cambridge",
+      "nss1_state": "MA",
+      "nss1_zip": "02139"
+    }
+  },
+  {
+    "iri": "http://x.y/MitsAddress",
+    "properties": {
+      "nss1_street": "77 Massachusetts Avenue",
+      "nss1_city": "Cambridge",
+      "nss1_state": "MA",
+      "nss1_zip": "02139"
+    }
+  },
+  {
+    "iri": "http://x.y/Math101",
+    "properties": {
+      "nss1_name": "Math 101"
+    }
+  },
+  {
+    "iri": "http://x.y/Math101",
+    "properties": {
+      "nss1_name": "Math 101"
+    }
+  },
+  {
+    "iri": "http://x.y/MathDept",
+    "properties": {
+      "nss1_name": "Department of Mathematics"
+    }
+  },
+  {
+    "iri": "http://x.y/MathDept",
+    "properties": {
+      "nss1_name": "Department of Mathematics"
+    }
+  },
+  {
+    "iri": "http://x.y/John",
+    "properties": {
+      "nss1_name": "John",
+      "nss1_dob": "05-05"
+    }
+  },
+  {
+    "iri": "http://x.y/John",
+    "properties": {
+      "nss1_name": "John",
+      "nss1_dob": "05-05"
+    }
+  },
+  {
+    "iri": "http://x.y/Bob",
+    "properties": {
+      "nss1_name": "Bob",
+      "nss1_dob": "1995-01-01",
+      "nss1_takesCourse": "Web Engineering"
+    }
+  },
+  {
+    "iri": "http://x.y/Bob",
+    "properties": {
+      "nss1_name": "Bob",
+      "nss1_dob": "1995-01-01",
+      "nss1_takesCourse": "Web Engineering"
+    }
+  },
+  {
+    "iri": "http://x.y/Stanford",
+    "properties": {
+      "nss1_name": "Stanford University",
+      "nss1_address": "450 Serra Mall, Stanford, CA 94305",
+      "nss1_country": "USA"
+    }
+  },
+  {
+    "iri": "http://x.y/Stanford",
+    "properties": {
+      "nss1_name": "Stanford University",
+      "nss1_address": "450 Serra Mall, Stanford, CA 94305",
+      "nss1_country": "USA"
+    }
+  },
+  {
+    "iri": "http://x.y/CompSci202",
+    "properties": {
+      "nss1_name": "Computer Science 202"
+    }
+  },
+  {
+    "iri": "http://x.y/CompSci202",
+    "properties": {
+      "nss1_name": "Computer Science 202"
+    }
+  },
+  {
+    "iri": "http://x.y/Marry",
+    "properties": {
+      "nss1_name": "Marry Donaldson"
+    }
+  },
+  {
+    "iri": "http://x.y/Marry",
+    "properties": {
+      "nss1_name": "Marry Donaldson"
+    }
+  },
+  {
+    "iri": "http://x.y/CompSciDept",
+    "properties": {
+      "nss1_name": "Department of Computer Science"
+    }
+  },
+  {
+    "iri": "http://x.y/CompSciDept",
+    "properties": {
+      "nss1_name": "Department of Computer Science"
+    }
+  },
+  {
+    "iri": "http://x.y/UsaCountry",
+    "properties": {
+      "nss1_isoCode": "US",
+      "nss1_name": "United States of America"
+    }
+  },
+  {
+    "iri": "http://x.y/UsaCountry",
+    "properties": {
+      "nss1_isoCode": "US",
+      "nss1_name": "United States of America"
+    }
+  }
+]

@@ -42,6 +42,10 @@ public class CompleteMapping {
     private HashMap<String, String> prefixes;
     private int free_prefix = 1;
 
+    public HashMap<String, String> getPrefixes() {
+        return prefixes;
+    }
+
     public void run(String input_instance_filename, String input_schema_filename) {
         PGWriter schema_pgwriter = new YPGWriter("schema.ypg");
         PGWriter instance_pgwriter = new YPGWriter("instance.ypg");

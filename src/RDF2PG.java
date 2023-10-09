@@ -13,10 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import maps.complete.CompleteMapping;
 import maps.generic.GenericMapping;
 import maps.simple.SimpleMapping;
 import pgraph.PropertyGraph;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class RDF2PG {
 
@@ -70,21 +74,27 @@ public class RDF2PG {
             String rdf_filename = String.valueOf(args[1]);
             String rdfs_filename = String.valueOf(args[2]);
             String neo4j_flag = String.valueOf(args[3]);
-            if (opt.compareTo("-cdm") == 0 && neo4j_flag.compareTo("-neo4j") == 0) {
+            if (opt.compareTo("-cdm") == 0 && neo4j_flag.compareTo("-neo4jCsv") == 0) {
+                System.out.println("Hello, Running complete database mapping with Neo4j CSV output");
+                Neo4jCsvWriter instance_pgWriter = new Neo4jCsvWriter();
+                Neo4jCsvWriter schema_pgWriter = new Neo4jCsvWriter();
+                CompleteMapping cdm = new CompleteMapping();
+                cdm.run(rdf_filename, rdfs_filename, instance_pgWriter, schema_pgWriter);
+                printPrefixes(cdm);
+            } else if (opt.compareTo("-cdm") == 0 && neo4j_flag.compareTo("-neo4jQueries") == 0) {
                 System.out.println("Hello, Running complete database mapping with Neo4j Query output");
                 Neo4jWriter instance_pgWriter = new Neo4jWriter("instance-queries-cdm.cypher");
                 Neo4jWriter schema_pgWriter = new Neo4jWriter("schema-queries-cdm.cypher");
                 CompleteMapping cdm = new CompleteMapping();
-                cdm.run(rdf_filename, rdfs_filename, instance_pgWriter,schema_pgWriter);
-
-                System.out.println("Output: sudentExample-instance.ypg and sudentExample-schema.ypg");
+                cdm.run(rdf_filename, rdfs_filename, instance_pgWriter, schema_pgWriter);
+                printPrefixes(cdm);
             } else {
                 System.out.println("Invalid option");
             }
             etime = System.currentTimeMillis() - itime;
             System.out.println("Execution time: " + etime + " ms \n");
 
-        }  else {
+        } else {
             System.out.println("Usage:");
             System.out.println("// Simple database mapping");
             System.out.println("$ java -jar rdf2pg -sdm <RDF_filename>");
@@ -93,6 +103,20 @@ public class RDF2PG {
             System.out.println("// Complete database mapping (schema-dependent)");
             System.out.println("$ java -jar rdf2pg -cdm <RDF_filename> <RDFS_filename>");
             return;
+        }
+    }
+
+    private static void printPrefixes(CompleteMapping cdm) {
+        //write prefixes to a csv file
+        try {
+            Writer prefixWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("PG_PREFIX_MAP.csv"), StandardCharsets.UTF_8));
+            prefixWriter.write("prefix,iri\n");
+            for (String key : cdm.getPrefixes().keySet()) {
+                prefixWriter.write(key + "," + cdm.getPrefixes().get(key) + "\n");
+            }
+            prefixWriter.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
