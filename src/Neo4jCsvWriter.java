@@ -106,16 +106,18 @@ public class Neo4jCsvWriter implements PGWriter {
             jsonObject.put("iri", nodeIriProp);
             jsonObject.set("properties", propsNode);
 
-            // Convert the JSON object to a JSON string
-            String jsonStr = jsonObject.toString();
-            try {
-                pgNodesPropWriter.write(jsonStr + ",");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if(!isValid(jsonObject.toString(), new ObjectMapper())) {
+                System.out.println("Invalid JSON: " + jsonObject.toString());
             }
-            // Now, jsonStr contains the JSON structure you need
-            // You can write it to your desired location as needed
-            writePgNodePropJson(jsonStr + ",");
+
+            // Check if this is the first JSON object
+            if (oid == 2) {
+                // If it's the first object, don't write a comma before it
+                writePgNodePropJson(jsonObject + "\n");
+            } else {
+                // If it's not the first object, write a comma before it
+                writePgNodePropJson("," + jsonObject + "\n");
+            }
         }
 
         String lineCsv = node.getId() + "|" + nodeIriProp + "|" + labels + "\n";
@@ -225,5 +227,14 @@ public class Neo4jCsvWriter implements PGWriter {
 
     public void setPrefixes(HashMap<String, String> prefixes) {
         this.prefixes = prefixes;
+    }
+
+    public boolean isValid(String json, ObjectMapper mapper) {
+        try {
+            mapper.readTree(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 }
