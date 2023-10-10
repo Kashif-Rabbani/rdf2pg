@@ -105,21 +105,19 @@ public class Neo4jCsvWriter implements PGWriter {
             ObjectNode jsonObject = new ObjectMapper().createObjectNode();
             jsonObject.put("iri", nodeIriProp);
             jsonObject.set("properties", propsNode);
-
-            if(!isValid(jsonObject.toString(), new ObjectMapper())) {
+            if (isValid(jsonObject.toString(), new ObjectMapper())) {
+                // Check if this is the first JSON object
+                if (oid == 2) {
+                    // If it's the first object, don't write a comma before it
+                    writePgNodePropJson(jsonObject + "\n");
+                } else {
+                    // If it's not the first object, write a comma before it
+                    writePgNodePropJson("," + jsonObject + "\n");
+                }
+            } else {
                 System.out.println("Invalid JSON: " + jsonObject.toString());
             }
-
-            // Check if this is the first JSON object
-            if (oid == 2) {
-                // If it's the first object, don't write a comma before it
-                writePgNodePropJson(jsonObject + "\n");
-            } else {
-                // If it's not the first object, write a comma before it
-                writePgNodePropJson("," + jsonObject + "\n");
-            }
         }
-
         String lineCsv = node.getId() + "|" + nodeIriProp + "|" + labels + "\n";
         this.writePgNodeWdLabel(lineCsv);
     }
