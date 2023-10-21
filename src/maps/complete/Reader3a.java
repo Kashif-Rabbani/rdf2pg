@@ -1,6 +1,6 @@
-/* 
+/*
  * Copyright 2020 Renzo Angles (http://renzoangles.com/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -101,7 +101,11 @@ public class Reader3a implements StreamRDF {
                     tnode.addProperty("id", id);
                 } else if (o.isLiteral()) {
                     String pred_name = this.addPrefix(p.getNameSpace()) + "_" + p.getLocalName();
-                    snode.addProperty(pred_name, o.getLiteralValue().toString());
+                    try {
+                        snode.addProperty(pred_name, o.getLiteralValue().toString());
+                    } catch (org.apache.jena.datatypes.DatatypeFormatException e) {
+                        // Skipping invalid literal
+                    }
                 } else {
                     System.out.println("Error: Invalid RDF triple");
                     System.out.println(this.getNodeString(s) + " - " + this.getNodeString(p) + " - " + this.getNodeString(o));
